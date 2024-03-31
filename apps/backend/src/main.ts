@@ -7,6 +7,8 @@ const PORT = process.env.PORT ?? 8000;
 
 const app = express();
 
+app.use(express.json());
+
 // define root route
 app.get('/api/hello', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
