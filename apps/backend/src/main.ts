@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 const PORT = process.env.PORT ?? 8000;
 
+// connect to database
+mongoose.connect(process.env.MONGODB_URI, {});
+
 const app = express();
 
 app.use(express.json());
