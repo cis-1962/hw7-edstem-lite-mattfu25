@@ -4,6 +4,7 @@ import express from 'express';
 import cookieSession from 'cookie-session';
 
 import accountRouter from './routes/account';
+import questionsRouter from './routes/questions';
 
 // read environment variables from .env file
 dotenv.config();
@@ -29,6 +30,9 @@ app.use(express.json());
 
 // add account router
 app.use('/api/account', accountRouter);
+
+// add questions router
+app.use('/api/questions', questionsRouter);
 
 // define root route
 app.get('/api/hello', (_, res) => {

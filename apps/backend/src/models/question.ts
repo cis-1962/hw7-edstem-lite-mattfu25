@@ -8,7 +8,7 @@ interface IQuestion {
 
 const schema = new Schema<IQuestion>({
     questionText: { type: String, required: true },
-    answer: { type: String, required: true },
+    answer: { type: String, required: false },
     author: { type: String, required: true },
 });
 
