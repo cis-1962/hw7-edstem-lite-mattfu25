@@ -50,13 +50,36 @@ accountRouter.post('/signup', async (req, res) => {
 });
 
 // login route
-accountRouter.post('/login', (req, res) => {
+accountRouter.post('/login', async (req, res) => {
+    // validate input shape
+    const result = signupSchema.safeParse(req.body);
+    if (!result.success) {
+        res.status(400).json({error: 'Invalid input.'});
+        return;
+    }
 
+    // extract username and password
+    const {username, password} = req.body;
+    if (!username || !password) {
+        res.status(400).json({error: 'Username and password are required.'});
+        return;
+    }
+
+     // check if password is incorrect
+    const user = await User.find({username, password});
+    if (!user) {
+        res.status(400).json({error: 'Incorrect username or password.'});
+        return;
+    }
+
+    req.session!.user = username;
+    res.status(201).json({message: 'Logged in.'});
 });
 
 // logout route
 accountRouter.post('/logout', (req, res) => {
-
+    req.session = null;
+    res.status(200).json({message: 'Logged out.'});
 });
 
 export default accountRouter;
