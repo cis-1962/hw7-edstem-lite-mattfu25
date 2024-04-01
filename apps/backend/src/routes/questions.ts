@@ -2,6 +2,7 @@ import express from 'express';
 import z from 'zod';
 
 import Question from '../models/question';
+import requireAuth from '../middlewares/require-auth';
 
 // create router
 const questionsRouter = express.Router();
@@ -27,6 +28,9 @@ questionsRouter.get('/', async (req, res) => {
         return;
     }
 });
+
+// allow only authenticated users to add questions or answers
+questionsRouter.use(requireAuth);
 
 // add question router
 questionsRouter.post('/add', async (req, res) => {

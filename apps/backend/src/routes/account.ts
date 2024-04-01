@@ -3,6 +3,7 @@ import z from 'zod';
 import bcrypt from 'bcrypt';
 
 import User from '../models/user';
+import requireAuth from '../middlewares/require-auth';
 
 // create router
 const accountRouter = express.Router();
@@ -87,6 +88,9 @@ accountRouter.post('/login', async (req, res) => {
         return;
     }
 });
+
+// allow logout only for authenticated users
+accountRouter.use(requireAuth);
 
 // logout route
 accountRouter.post('/logout', (req, res) => {
