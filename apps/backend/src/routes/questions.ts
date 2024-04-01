@@ -19,12 +19,12 @@ const addAnswerSchema = z.object({
 });
 
 // get questions router
-questionsRouter.get('/', async (req, res) => {
+questionsRouter.get('/', async (req, res, next) => {
     try {
         const questions = await Question.find({});
         res.status(200).json(questions);
     } catch (error) {
-        res.status(500).json({error: 'An error occurred.'});
+        next(error);
         return;
     }
 });
@@ -33,7 +33,7 @@ questionsRouter.get('/', async (req, res) => {
 questionsRouter.use(requireAuth);
 
 // add question router
-questionsRouter.post('/add', async (req, res) => {
+questionsRouter.post('/add', async (req, res, next) => {
     try {
         // validate input shape
         const result = addQuestionSchema.safeParse(req.body);
@@ -61,14 +61,14 @@ questionsRouter.post('/add', async (req, res) => {
 
         res.status(201).json({message: 'Question added.'});
     } catch (error) {
-        res.status(500).json({error: 'An error occurred.'});
+        next(error);
         return;
     }
 });
 
 
 // answer question router
-questionsRouter.post('/answer', async (req, res) => {
+questionsRouter.post('/answer', async (req, res, next) => {
     try {
         // validate input shape
         const result = addAnswerSchema.safeParse(req.body);
@@ -89,7 +89,7 @@ questionsRouter.post('/answer', async (req, res) => {
 
         res.status(201).json({message: 'Answer added.'});
     } catch (error) {
-        res.status(500).json({error: 'An error occurred.'});
+        next(error);
         return;
     }
 });

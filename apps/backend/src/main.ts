@@ -39,6 +39,12 @@ app.get('/api/hello', (_, res) => {
   res.json({ message: 'Hello, frontend!' });
 });
 
+app.use((err, _req, res, _next) => {
+  // eslint-disable-next-line no-console
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong.' });
+});
+
 // listen
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

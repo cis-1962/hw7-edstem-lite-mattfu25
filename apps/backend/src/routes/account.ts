@@ -15,7 +15,7 @@ const signupSchema = z.object({
 });
 
 // signup route
-accountRouter.post('/signup', async (req, res) => {
+accountRouter.post('/signup', async (req, res, next) => {
     try {
         // validate input shape
         const result = signupSchema.safeParse(req.body);
@@ -51,13 +51,13 @@ accountRouter.post('/signup', async (req, res) => {
         res.status(201).json({message: 'Account created.'});
         return
     } catch (error) {
-        res.status(500).json({error: 'An error occurred.'});
+        next(error);
         return;
     }
 });
 
 // login route
-accountRouter.post('/login', async (req, res) => {
+accountRouter.post('/login', async (req, res, next) => {
     try {
         // validate input shape
         const result = signupSchema.safeParse(req.body);
@@ -84,7 +84,7 @@ accountRouter.post('/login', async (req, res) => {
         res.status(201).json({message: 'Logged in.'});
         return;
     } catch (error) {
-        res.status(500).json({error: 'An error occurred.'});
+        next(error);
         return;
     }
 });
