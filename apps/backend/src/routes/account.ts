@@ -7,7 +7,7 @@ import User from '../models/user';
 // create router
 const accountRouter = express.Router();
 
-// define input zod schemas
+// define input shape for validation
 const signupSchema = z.object({
     username: z.string(),
     password: z.string(),
@@ -15,7 +15,7 @@ const signupSchema = z.object({
 
 // signup route
 accountRouter.post('/signup', async (req, res) => {
-    // validate input
+    // validate input shape
     const result = signupSchema.safeParse(req.body);
     if (!result.success) {
         res.status(400).json({error: 'Invalid input.'});
@@ -23,7 +23,7 @@ accountRouter.post('/signup', async (req, res) => {
     }
 
     // extract username and password
-    const {username, password} = req.body as {username: string, password: string};
+    const {username, password} = req.body;
     if (!username || !password) {
         res.status(400).json({error: 'Username and password are required.'});
         return;

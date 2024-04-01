@@ -1,6 +1,6 @@
-import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import express from 'express';
 import cookieSession from 'cookie-session';
 
 import accountRouter from './routes/account';
@@ -8,9 +8,11 @@ import accountRouter from './routes/account';
 // read environment variables from .env file
 dotenv.config();
 const PORT = process.env.PORT ?? 8000;
+const MONGODB_URI = process.env.MONGODB_URI || '';
+const COOKIE_SECRET = process.env.COOKIE_SECRET || '';
 
-// connect to database
-mongoose.connect(process.env.MONGODB_URI || '', {});
+// connect to mongodb
+mongoose.connect(MONGODB_URI, {});
 
 // start express app
 const app = express();
@@ -18,7 +20,7 @@ const app = express();
 // add cookie middleware
 app.use(cookieSession({
   name: 'session',
-  secret: process.env.COOKIE_SECRET,
+  secret: COOKIE_SECRET,
   maxAge: 24 * 60 * 60 * 1000,
 })); 
 
