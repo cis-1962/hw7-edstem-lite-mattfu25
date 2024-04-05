@@ -73,12 +73,18 @@ accountRouter.post('/login', async (req, res, next) => {
             return;
         }
     
-         // check if password is incorrect
-        const user = await User.find({username, password});
-        if (!user) {
-            res.status(400).json({error: 'Incorrect username or password.'});
-            return;
-        }
+         // check if username and password is incorrect
+         const user = await User.findOne({ username });
+         if (!user) {
+             res.status(400).json({ error: 'Incorrect username.' });
+             return;
+         }
+         
+         const correctPassword = await bcrypt.compare(password, user.password);
+         if (!correctPassword) {
+             res.status(400).json({ error: 'Incorrect password.' });
+             return;
+         }
     
         req.session!.user = username;
         res.status(201).json({message: 'Logged in.'});
