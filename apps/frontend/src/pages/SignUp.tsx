@@ -16,7 +16,7 @@ function Signup() {
         password,
       });
       if (response.status === 201) {
-        navigate('/'); // Redirect to home page on successful sign up
+        navigate('/'); 
       } else {
         alert('Signup failed');
       }
