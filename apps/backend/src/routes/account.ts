@@ -87,7 +87,7 @@ accountRouter.post('/login', async (req, res, next) => {
          }
     
         req.session!.user = username;
-        res.status(201).json({message: 'Logged in.'});
+        res.status(200).json({message: 'Logged in.'});
         return;
     } catch (error) {
         next(error);
