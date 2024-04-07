@@ -19,18 +19,18 @@ function Signup() {
       if (response.status === 201) {
         navigate('/');
       } else {
+        // eslint-disable-next-line no-alert
         alert('Signup failed');
       }
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert('Signup failed');
     }
   };
 
   return (
     <div>
-      <header className="p-4 text-3xl bg-purple-400">
-        Ed Kinda
-      </header>
+      <header className="p-4 text-3xl bg-purple-400">Ed Kinda</header>
       <div className="min-h-screen flex flex-col items-center p-5 bg-purple-100">
         <div>
           <h2 className="text-3xl p-5">Sign Up</h2>
@@ -69,7 +69,7 @@ function Signup() {
             Sign Up
           </button>
         </form>
-        <div className = "p-5">
+        <div className="p-5">
           <p>
             Already have an account?
             <Link to="/login" className="text-blue-500 pl-1">

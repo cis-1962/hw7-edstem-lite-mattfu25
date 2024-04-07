@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const QuestionModal = ({ showModal, setShowModal, refreshData }) => {
   const [questionText, setQuestionText] = useState('');
@@ -12,6 +13,7 @@ const QuestionModal = ({ showModal, setShowModal, refreshData }) => {
       setShowModal(false);
       refreshData();
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert('Failed to add question');
     }
   };
@@ -47,6 +49,12 @@ const QuestionModal = ({ showModal, setShowModal, refreshData }) => {
       </div>
     </div>
   );
+};
+
+QuestionModal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
+  refreshData: PropTypes.func.isRequired,
 };
 
 export default QuestionModal;

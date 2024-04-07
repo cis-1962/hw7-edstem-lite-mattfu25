@@ -20,18 +20,18 @@ function Login() {
       if (response.status === 200) {
         navigate('/');
       } else {
+        // eslint-disable-next-line no-alert
         alert('Login failed');
       }
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert('Login failed');
     }
   };
 
   return (
     <div>
-      <header className="p-4 text-3xl bg-purple-400">
-        Ed Kinda
-      </header>
+      <header className="p-4 text-3xl bg-purple-400">Ed Kinda</header>
       <div className="min-h-screen flex flex-col items-center p-5 bg-purple-100">
         <div>
           <h2 className="text-3xl p-5">Log In</h2>
@@ -70,9 +70,9 @@ function Login() {
             Log In
           </button>
         </form>
-        <div className = "p-5">
+        <div className="p-5">
           <p>
-            Don't have an account?
+            Do not have an account?
             <Link to="/signup" className="text-blue-500 pl-1">
               Sign up!
             </Link>

@@ -19,11 +19,13 @@ mongoose.connect(MONGODB_URI, {});
 const app = express();
 
 // add cookie middleware
-app.use(cookieSession({
-  name: 'session',
-  secret: COOKIE_SECRET,
-  maxAge: 24 * 60 * 60 * 1000,
-})); 
+app.use(
+  cookieSession({
+    name: 'session',
+    secret: COOKIE_SECRET,
+    maxAge: 24 * 60 * 60 * 1000,
+  }),
+);
 
 // add json parser middleware
 app.use(express.json());

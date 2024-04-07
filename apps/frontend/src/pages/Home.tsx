@@ -34,14 +34,15 @@ function Home() {
           setUsername(response.data.username);
         }
       } catch (error) {
-        console.error('Failed to fetch login status', error);
+        // eslint-disable-next-line no-alert
+        alert('Failed to check login status');
       }
     };
 
     fetchLoginStatus();
   }, []);
 
-  // wrapper function to immediately force mutate/refresh 
+  // wrapper function to immediately force mutate/refresh
   const refreshData = () => {
     mutate();
   };
@@ -53,6 +54,7 @@ function Home() {
       setIsLoggedIn(false);
       navigate('/login');
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert('Logout failed');
     }
   };
@@ -67,6 +69,7 @@ function Home() {
       setAnswer('');
       setSelectedQuestion({ ...selectedQuestion, answer });
     } catch (error) {
+      // eslint-disable-next-line no-alert
       alert('Failed to submit answer');
     }
   };
@@ -77,9 +80,9 @@ function Home() {
   }
 
   // is loading case
-  if (isLoading){
+  if (isLoading) {
     return <div>Loading...</div>;
-  } 
+  }
 
   // loaded case
   return (
@@ -103,10 +106,7 @@ function Home() {
               Add new Question +
             </button>
           ) : (
-            <Link
-              to="/login"
-              className="p-2 text-white bg-blue-500"
-            >
+            <Link to="/login" className="p-2 text-white bg-blue-500">
               Log in to submit a question
             </Link>
           )}
