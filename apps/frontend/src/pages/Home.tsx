@@ -115,6 +115,13 @@ function Home() {
             <div
               key={question._id}
               onClick={() => setSelectedQuestion(question)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setSelectedQuestion(question);
+                }
+              }}
+              role="button" 
+              tabIndex={0} 
               className="p-2 border"
             >
               {question.questionText}
