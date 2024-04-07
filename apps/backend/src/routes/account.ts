@@ -14,6 +14,21 @@ const signupSchema = z.object({
     password: z.string(),
 });
 
+// login status route
+accountRouter.get('/', async (req, res, next) => {
+    try {
+        if (!req.session!.user) {
+            res.status(200).json({isLoggedIn: false});
+            return;
+        } 
+        res.status(200).json({isLoggedIn: true, username: req.session!.user});
+        return;        
+    } catch (error) {
+        next(error);
+        return;
+    }
+});
+
 // signup route
 accountRouter.post('/signup', async (req, res, next) => {
     try {
